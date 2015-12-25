@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.SuperSlide.2.1.1.js"></script>
+  <script type="text/javascript" src="../js/jquery.style.js"></script>
+<title>{$page_title}</title>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<section class="container auto fix mb20">
+    <div class="w_383 fl">
+        <div class="tit_1">选择国家</div>
+        <div class="mod_01">
+            <ul>
+                <li class="fix">
+                    <div class="c_1">
+                        <a href="#" class="a_1">亚洲</a>
+                        <a href="#" class="a_2 tr">MORE+</a>
+                    </div>
+                    <div class="c_2 fix">
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>中国</p>
+                            </a>
+                        </div>
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>日本</p>
+                            </a>
+                        </div>
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>菲律宾</p>
+                            </a>
+                        </div>
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>越南</p>
+                            </a>
+                        </div>
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>韩国</p>
+                            </a>
+                        </div>
+                        <div class="img">
+                            <a href="#">
+                                <img src="images/001.png" />
+                                <p>朝鲜</p>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+     <div class="w_817 fl">
+        <div class="tit_1">网站导航</div>
+        <div class="mod_02">
+            <ul>
+            <!--{foreach from=$index_categories item=cat name =foo}-->
+                <li class="fix">
+                    <div class="c_1">
+                        <a href="#">
+                            <span class="vm">{$smarty.foreach.foo.iteration}F</span>
+                            <img src="images/tb_8.png" class="vm" />
+                        </a>
+                    </div>
+                    <div class="c_2">
+                       <a href="{$cat.url}">{$cat.name|escape:html}:</a>
+                         <!--{foreach from=$cat.cat_id item=child}-->
+ 						<a href="{$child.url}">{$child.name|escape:html}</a>
+                   		 <!--{/foreach}-->
+                    </div>
+                    <div class="c_3"><a href="{$cat.url}">MORE</a></div>
+                </li>
+             <!--{/foreach}--> 
+            </ul>
+        </div>
+    </div>
+    </section>
+    <!--{foreach from=$index_categories item=cat name=foo}-->
+    <section class="container tabs auto mb20">
+    <div class="tit_2">
+        <span>{$smarty.foreach.foo.iteration}F</span>
+        <a href="{$cat.url}">{$cat.name|escape:html}</a>
+    </div>
+    <div class="fix">
+        <div class="mod_03 fl">
+            <ul class="fix">
+             <!--{foreach from=$cat.cat_id item=child}-->
+ 					<li class="bnone">	<a href="{$child.url}">{$child.name|escape:html}</a></li>
+            <!--{/foreach}-->
+
+            </ul>
+        </div>
+        <div class="mod_04 tabs fl">
+            <div class="title fix">
+                <div id="hot_{$cat.id}" class="tabs_tit">热卖商品</div>
+                <div id="new_{$cat.id}" class="tabs_tit">新品推荐</div>
+                <div id="best_{$cat.id}"  class="tabs_tit">潮人推荐</div>
+                <div id="promotion_{$cat.id}"  class="tabs_tit">年中大促</div>
+            </div>
+            <div class="content">
+             
+                <div style="position:relative" class="list_01">
+                    <ul class="fix">
+                      <!--{ foreach from=$cat.hot  item=goods }-->
+                      
+                        <li>
+                            <a href="{$goods.url}">
+                                <img src="{$goods.goods_img}" />
+                                <p class="tc">{$goods.name}</p>
+                                <p class="fix">
+                                   <span class="sp_1 fl">
+                                <!--{if $goods.promote_price neq ""}-->
+                                {$goods.promote_price}
+                                <!-- {else}-->
+                                    {$goods.shop_price}
+                                <!--{/if}-->
+                                    </span>
+                                    <span class="sp_2 fr">{$goods.market_price} </span>
+                                </p>
+                            </a>
+                        </li>
+                        
+                     <!--{/foreach}--> 
+
+                    </ul>
+                    <div class="more"><a href="#">MORE+</a></div>
+                </div>
+
+                
+                
+                  <div style="position:relative" class="list_01">
+                    <ul class="fix">
+                    
+                    <!--{ foreach from=$cat.new  item=goods }-->
+                   
+                        <li>
+                            <a href="{$goods.url}">
+                                <img src="{$goods.goods_img}" />
+                               
+                                <p class="tc"> {$goods.name}</p>
+                                <p class="fix">
+                                   <span class="sp_1 fl">
+                                <!--{if $goods.promote_price neq ""}-->
+                                {$goods.promote_price}
+                                <!-- {else}-->
+                                    {$goods.shop_price}
+                                <!--{/if}-->
+                                    </span>
+                                    <span class="sp_2 fr">{$goods.market_price} </span>
+                                </p>
+                            </a>
+                        </li>
+                      
+                     <!--{/foreach}--> 
+                    </ul>
+                    <div class="more"><a href="#">MORE+</a></div>
+                </div>
+                
+                
+                
+                 <div style="position:relative" class="list_01">
+                    <ul class="fix">
+                    
+                    <!--{ foreach from=$cat.best  item=goods }-->
+                   
+                        <li>
+                            <a href="{$goods.url}">
+                                <img src="{$goods.goods_img}" />
+                                
+                                <p class="tc"> {$goods.name}</p>
+                                <p class="fix">
+                                
+                                <span class="sp_1 fl">
+                                <!--{if $goods.promote_price neq ""}-->
+                                {$goods.promote_price}
+                                <!-- {else}-->
+                                    {$goods.shop_price}
+                                <!--{/if}-->
+                                    </span>
+                                    
+                                    <span class="sp_2 fr">{$goods.market_price} </span>
+                                </p>
+                            </a>
+                        </li>
+                        
+                     <!--{/foreach}--> 
+                    </ul>
+                    <div class="more"><a href="#">MORE+</a></div>
+                </div>
+                
+                
+                
+                   <div style="position:relative" class="list_01">
+                    <ul class="fix">
+                    
+                    <!--{ foreach from=$cat.promotion  item=goods }-->
+                    
+                        <li>
+                            <a href="{$goods.url}">
+                                <img src="{$goods.goods_img}" />
+                                
+                                <p class="tc"> {$goods.names}</p>
+                                <p class="fix">
+                                
+                                    <span class="sp_1 fl">{$goods.promote_price}</span>
+                                    <span class="sp_2 fr">{$goods.market_price} </span>
+                                </p>
+                            </a>
+                        </li>
+                       
+                     <!--{/foreach}--> 
+                    </ul>
+                    <div class="more"><a href="#">MORE+</a></div>
+                </div>
+                
+                
+                <div class="list_01">
+                 <div class="more"><a href="#">MORE+</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide_1 fl">
+            <div class="hd">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <a href="#" target="_blank"><img src="images/img_1.jpg" /></a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank"><img src="images/img_2.jpg" /></a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank"><img src="images/img_1.jpg" /></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--{/foreach}--> 
+<script type="text/javascript">
+    jQuery(".slide_1").slide({mainCell:".bd ul",autoPlay:true});
+</script>
+<!--main end-->
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+  
+</html>

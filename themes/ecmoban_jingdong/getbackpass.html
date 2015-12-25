@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>找回密码</title>
+<meta name="keywords" content="找回密码" />
+<meta name="description" content="找回密码" />
+<link rel="stylesheet" type="text/css" href="../CSS/style.css" />
+<script type="text/javascript" src="../Scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/password.js"></script>
+</head>
+<body>
+<div id="main">
+	<div id="first" class="cd-user-modal is-visible"> 
+		<div class="cd-user-modal-container login">
+				<ul class="cd-switcher">
+				<li style="width:100%;"><a style="font-family:'微软雅黑';color:red;background:green;font-size:20px;" href="#">找回密码</a></li>
+			</ul>
+			<div id="cd-login" class="is-selected"> <!-- 登录表单 -->
+				<div class="cd-form">
+					<p class="fieldset">
+						<label class="" >第一步：验证邮箱或者手机号</label>
+					</p>
+				
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">邮箱</label>
+						<input class="full-width has-padding has-border" id="email" type="text" placeholder="输入邮箱账号">
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-password">手机号</label>
+						<input class="full-width has-padding has-border" id="tel" type="text"  placeholder="请输入电话号码">
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">验证码</label>
+						<input class="half-width has-padding has-border" id="code_gg" type="text" placeholder="请输入验证码">
+						<img src="/ajaxphp/code_gg.php" style="width:30%" class="getcode_gg"  onclick="changimg()"  title="看不清，点击换一张" >
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">手机或者邮箱验证码</label>
+						<input id="getyan" class="half-width" type="submit" value="获取验证码" onclick="submittel()">
+						<input class="half-width has-padding has-border" id="code_tel" type="text" placeholder="请输入收到的验证码">
+						<span class="reerror_tip" id="error_code_tel"></span>
+						
+					</p>
+					<p class="fieldset">
+						<label  class="error_tip" id="error_tip"> 电话号码和邮箱号码您只需要填写一个</label>
+					</p>
+					
+					<p class="fieldset">
+						<input id="submit" class="full-width2" type="submit" value="找回密码" onclick="submityan()">
+					</p>
+					<div class="dibu"><a href="../login.html">登录</a>&nbsp;&nbsp;&nbsp;<a href="../company_register.html">注册账号</a> </div>
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+		<div id="second" class="cd-user-modal"> 
+		<div class="cd-user-modal-container login">
+				<ul class="cd-switcher">
+				<li style="width:100%;"><a style="font-family:'微软雅黑';color:red;background:green;font-size:20px;" href="#">找回密码</a></li>
+			</ul>
+				<div id="#cd-signup" class="is-selected"> <!-- 登录表单 -->
+				<div class="cd-form">
+					<p class="fieldset">
+						<label class="" >第二步：找回密码</label>
+					</p>
+				
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">输入密码</label>
+						<input maxlength="20"  class="full-width has-padding has-border" id="pass" type="password" placeholder="输入新的密码">
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">确认密码</label>
+						<input maxlength="20"  class="full-width has-padding has-border" id="cpass" type="password"  placeholder="请确认密码">
+					</p>
+					<p class="fieldset">
+						<label  class="error_tip" id="error_tip"> </label>
+					</p>
+					
+					<p class="fieldset">
+						<input id="submit" class="full-width2" type="submit" value="确认" onclick="submit()">
+					</p>
+					<div class="dibu"><a href="login.html">登录</a>&nbsp;&nbsp;&nbsp;<a href="company_register.html">注册账号</a> </div>
+				</div>
+			</div>
+			
+			</div>
+			</div>
+	
+</div>
+</body>
+</html>

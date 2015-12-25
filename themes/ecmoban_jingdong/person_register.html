@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>个人注册</title>
+<meta name="keywords" content="个人注册" />
+<meta name="description" content="个人注册" />
+<link rel="stylesheet" type="text/css" href="../CSS/style.css" />
+<script type="text/javascript" src="../Scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/person.js"></script>
+</head>
+<body>
+<div id="main">
+	<div class="cd-user-modal is-visible"> 
+		<div class="cd-user-modal-container">
+		<ul class="cd-switcher">
+				<li><a class="selected" href="#">个人用户注册</a></li>
+				<li><a href="../company_register.html">企业用户注册</a></li>
+			</ul>
+		<div id="cd-login" class="is-selected"> <!-- 登录表单 -->
+				<div class="cd-form">
+				<div class="dibu"><a href="../login.html">已经有账号了，返回登录</a> </div>
+				<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-username">手机</label>
+						<input class="full-width has-padding has-border" id="tel" type="text" placeholder="输入手机号码或者邮箱">
+						<span class="reerror_tip" id="error_tel"></span>
+					</p>
+										<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">手机或者邮箱验证码</label>
+						<input id="getyan" class="half-width" type="submit" value="获取注册码" onclick="submittel()">
+						<input class="half-width has-padding has-border" id="code_tel" type="text" placeholder="请输入收到的验证码">
+						<span class="reerror_tip" id="error_code_tel"></span>
+						
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">昵称</label>
+						<input class="full-width has-padding has-border" id="name" type="text" placeholder="输入昵称">
+						<span class="reerror_tip" id="error_name"></span>
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">密码</label>
+						<input maxlength="20"  class="full-width has-padding has-border" id="pass" type="password"  placeholder="输入密码">
+						<span class="reerror_tip" id="error_pass"></span>
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">确认密码</label>
+						<input maxlength="20"  class="full-width has-padding has-border" id="cpass" type="password"  placeholder="确认密码">
+						<span class="reerror_tip" id="error_cpass"></span>
+					</p>
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">验证码</label>
+						<input class="half-width has-padding has-border" id="code_gg" type="text" placeholder="请输入验证码">
+						<img 	style="width:30%" src="/ajaxphp/code_gg.php" class="getcode_gg"  onclick="changimg()"  title="看不清，点击换一张" >
+						<span class="reerror_tip" id="error_code_gg"></span>
+					</p>
+
+					<p class="fieldset">
+						<label  class="error_tip" id="error_tip"> </label>
+					</p>
+						<p class="fieldset">
+						<input type="checkbox" id="accept-terms">
+						<label for="accept-terms">我已阅读并同意 <a href="http://zc.qq.com/chs/agreement1_chs.html">用户协议</a></label>
+					</p>
+					<p class="fieldset">
+						<input id="submit" class="full-width2" type="submit" value="注册" onclick="chk_form()">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="js/jquery.style.js"></script>
+	{insert_scripts files='jquery.json.min.js'}
+	{insert_scripts files='region.js,utils.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+  <!-- {if $step eq "cart"} -->
+  <!-- 购物车内容 -->
+<section class="container auto mb30">
+    <div class="mod_18 fix">
+        <div class="name fl">全部商品</div>
+        <div class="text fr">为避免选购商品售罄或恢复原价，请尽快<span>结算！</span></div>
+    </div>
+    <div class="mod_19" id="list">
+        <div class="title fix tc mb5">
+            <div class="c_1 tl"><input name="" type="checkbox" value="" class="all mr15 vm" />全选</div>
+            <div class="c_2">{$lang.goods_attr}</div>
+            <div class="c_3">{$lang.shop_prices}</div>
+            <div class="c_4">{$lang.number}</div>
+            <div class="c_5">{$lang.subtotal}</div>
+            <div class="c_5">{$lang.handle}</div>
+        </div>
+        <div class="con_1 tc mb5">
+            <ul>
+			<!-- {foreach from=$goods_list item=goods} -->
+                <li class="fix">
+                    <div class="c_1 tl"><input name="" type="checkbox" value="{$goods.goods_id}" class="vm" /></div>
+                    <div class="c_2 fix">
+                        <div class="fl"><a href="goods.php?id={$goods.goods_id}" target="_blank">
+						<img  src="{$goods.goods_thumb}"/></a></div>
+                        <div style="width: 223px;" class="fl ml10 di tl pt20">
+						<a href="goods.php?id={$goods.goods_id}" target="_blank"" >{$goods.goods_name}({$goods.goods_attr|nl2br})</a></div>
+                    </div>
+                    <div class="c_3"><span id ="goods_price_{$goods.rec_id}" >{$goods.goods_price}</span></div>
+                    <div class="c_4">
+                        <a href="#"><img src="images/tb_25.jpg" onclick="reducenumber('goods_number_{$goods.rec_id}')" class="vm" /></a>
+				<!-- {if $goods.goods_id gt 0 && $goods.is_gift eq 0 && $goods.parent_id eq 0} 普通商品可修改数量 -->
+                <input type="text" maxlength="2" name="goods_number[{$goods.rec_id}]" id="goods_number_{$goods.rec_id}" value="{$goods.goods_number}" size="4" class="wbk_10 vm tc" onkeydown="showdiv(this)"/>
+                <!-- {else} -->
+                {$goods.goods_number}
+                <!-- {/if} -->
+                        <a href="#"><img src="images/tb_26.jpg" onclick="addnumber('goods_number_{$goods.rec_id}')" class="vm" /></a>
+                    </div>
+                    <div class="c_5" style="line-height: 44px;"><span id="goods_subtotal_{$goods.rec_id}">{$goods.subtotal}</span></div>
+                    <div class="c_5" style="line-height: 22px;">
+					<p><a href="javascript:if (confirm('{$lang.drop_goods_confirm}')) location.href='flow.php?step=drop_goods&amp;id={$goods.rec_id}'; " class="f6">{$lang.drop}</a>
+                <!-- {if $smarty.session.user_id gt 0 && $goods.extension_code neq 'package_buy'} 如果登录了，可以加入收藏 -->
+                </p><p><a href="javascript:if (confirm('{$lang.drop_goods_confirm}')) location.href='flow.php?step=drop_to_collect&amp;id={$goods.rec_id}'; " class="f6">{$lang.drop_to_collect}</a></p>
+                <!-- {/if} -->    
+                    </div>
+                </li>
+<!--{/foreach}-->
+            </ul>
+        </div>
+        <div class="con_2 fix ovh mb20">
+            <div class="fl">
+			<input name="" type="checkbox" value="" class="all ml10 mr10 vm" />全选
+			<a href="#" class="a_1 ml10">删除</a></div>
+            <div class="fr">运费：<span class="sp_1 mr20">¥ 0.00</span>
+			<span class="fs_18 mr20">
+			<span class="sp_1"><!-- {if $discount gt 0} --><p id="your_discount">{$your_discount}</p><!-- {/if} -->{$shopping_money}
+			</span></span>
+			<a href="./" class="a_2 mr20 tc">继续购物</a>
+			<a href="flow.php?step=checkout" class="a_3 mr20 tc">去结算</a>
+			</div>
+        </div>
+    </div>
+    <section class="mod_16">
+        <div class="tit_3">猜你喜欢</div>
+        <div class="content pt30 pb30" style="border: 1px solid #e0e0e0; border-top: none;">
+            <ul class="fix">
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/img_8.jpg" />依然婷 2015冬装新款女装韩版修身大毛领中
+                        <p>￥269.00</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</section>
+<!--{/if}-->
+<!--购物车结束-->
+
+<!--订单页面-->
+<!-- {if $step eq "checkout"} 开始订单确认界面 -->
+<section class="container auto mb30">
+    <div class="mod_22 tc mb20"><img src="images/tb_29.jpg" /></div>
+    <div class="mod_18 fix">
+        <div class="name fl">填写核对订单信息</div>
+        <div class="text fr">为避免选购商品售罄或恢复原价，请尽快<span>结算！</span></div>
+    </div>
+    <div class="mod_20">
+        <div class="title"><img src="images/tb_27.jpg" class="vm ml10 mr10" />收货人信息</div>
+        <div class="con_1">
+<div id="address">
+			<!-- {foreach from=$consignee_list item=consignee key=sn} -->
+            <div id="div{$consignee.address_id}" class="z_1 fix">
+				
+				
+				
+				
+				<!--{if $consignee.address_id eq $address_id}-->
+				<div class="fl">
+				<input type="radio" name="dx" value="{$consignee.address_id}" checked="checked" class="vm" />
+				<span class="ml10 mr10" id="address_name{$consignee.address_id}">{$consignee.consignee|escape}</span>
+				{$consignee.country_name|escape}
+				{$consignee.province_name|escape}{$consignee.city_name|escape}{$consignee.district_name|escape}
+				<span class="ml10 mr10" id="address_address{$consignee.address_id}">{$consignee.address|escape}</span>
+				<span class="ml10 mr10" id="address_tel{$consignee.address_id}">{$consignee.tel}</span></div>
+                <div id="caozuo_{$consignee.address_id}" class="fr"><a href="javascript:updataAddress({$consignee.address_id})">修改&nbsp;|</a>
+				<a href="javascript:deleteAddress({$consignee.address_id})">删除</a></div>
+				<!--{else}-->
+				<div class="fl"><input type="radio" value="{$consignee.address_id}" name="dx"  class="vm" />
+				<span class="ml10 mr10" id="address_name{$consignee.address_id}">{$consignee.consignee|escape}</span>
+				{$consignee.country_name|escape}
+				{$consignee.province_name|escape}{$consignee.city_name|escape}{$consignee.district_name|escape}
+				<span class="ml10 mr10" id="address_address{$consignee.address_id}">{$consignee.address|escape}</span>
+				<span class="ml10 mr10" id="address_tel{$consignee.address_id}">{$consignee.tel}</span></div>
+                <div id="caozuo_{$consignee.address_id}" class="fr"><a id="a_{$consignee.address_id}" href="javascript:morenAddress({$consignee.address_id})">设为默认&nbsp;|</a><a href="javascript:updataAddress({$consignee.address_id})">修改&nbsp;|</a>
+				<a href="javascript:deleteAddress({$consignee.address_id})">删除</a></div>
+				<!--{/if}-->
+				<input type="hidden" id ="country_id{$consignee.address_id}" value="{$consignee.country}"/>
+				<input type="hidden" id="province_id{$consignee.address_id}" value="{$consignee.province}" />
+				<input type="hidden" id="city_id{$consignee.address_id}" value="{$consignee.city}" />
+				<input type="hidden" id="district_id{$consignee.address_id}" value="{$consignee.district}" />
+			</div> 
+			<!-- {/foreach} -->
+</div>
+
+            <div class="skin_7 pt20">
+			<input type="hidden" id="address_id" value="" />
+                <ul>
+                    <li class="fix">{$country_list_text}
+                        <div class="c_1"><span class="mr10">*</span>收 货 人：</div>
+                        <div class="c_2"><input type="text" id="address_name" value="" class="wbk_7" /></div>
+                    </li>
+                    <li class="fix">
+                        <div class="c_1"><span class="mr10">*</span>收货城市：</div>
+                        <div class="c_2">
+                                <select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')" >
+								<option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+								<!-- {foreach from=$country_list item=country} -->
+								<option value="{$country.region_id}" >{$country.region_name}</option>
+								<!-- {/foreach} -->
+								</select>
+								<select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')" >
+								<option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+								<!-- {foreach from=$province_list item=province} -->
+								<option value="{$province.region_id}" >{$province.region_name}</option>
+								<!-- {/foreach} -->
+								</select>
+								<select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')" >
+								<option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+								<!-- {foreach from=$city_list item=city} -->
+								<option value="{$city.region_id}" >{$city.region_name}</option>
+								<!-- {/foreach} -->
+								</select>
+								<select name="district" id="selDistricts" {if !$district_list} style="display:none"{/if} >
+								<option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+								<!-- {foreach from=$district_list item=district} -->
+								<option value="{$district.region_id}" >{$district.region_name}</option>
+								<!-- {/foreach} -->
+								</select>
+                        </div>
+                    </li>
+                    <li class="fix">
+                        <div class="c_1"><span class="mr10">*</span>详细地址：</div>
+                        <div class="c_2"><input type="text" id="address_address" value="" class="wbk_8" /></div>
+                    </li>
+                    <li class="fix">
+                        <div class="c_1"><span class="mr10">*</span>电话号码：</div>
+                        <div class="c_2"><input type="text" id= "address_tel" value="" class="wbk_7" /></div>
+                    </li>
+                    <li class="fix">
+                        <div class="c_1">&nbsp;</div>
+                        <div class="c_2">
+                            <input type="submit" value="保存地址" class="input_5 mr10" onclick="saveAddress()"/>
+                            <input type="reset" value="取消" class="input_6" onclick="hiddendiv()" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="skin_6 tc">添加新地址</div>
+        </div>
+        <div class="title"><img src="images/tb_27.jpg" class="vm ml10 mr10" />支付方式</div>
+        <div class="con_2 fix">
+            <div class="c_1">支付方式：</div>
+            <div class="c_2">
+                <p><input type="radio" name="dx2" class="vm mr10" /><span class="mr10">在线支付</span>支付宝支付&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了保证及时处理您的订单，请您下单后尽快付款。</p>
+                <p class="pl20"><img src="images/tb_28.jpg" class="db" /></p>
+            </div>
+        </div>
+        <div class="con_2 fix bnone">
+            <div class="c_1">发票信息：</div>
+            <div class="c_2">
+                <p>部分商品可开增值税发票，如有需要，请联系客服400-007-0958。</p>
+                <p><input type="radio" name="dx3" class="vm mr10" /><span>暂不需要发票</span></p>
+                <p><input type="radio" name="dx3" class="vm mr10" /><span>普通发票</span><a href="javascript:void(0);" class="skin_8 ml30">修改</a></p>
+            </div>
+        </div>
+        <div class="skin_9 mb10">
+            <div class="fix mb5">
+                <div class="c_1">发票抬头：</div>
+                <div class="c_2">
+                    <select class="xlk_4">
+                        <option>个人</option>
+                    </select>
+                    <input type="text" class="wbk_11" />
+                </div>
+            </div>
+            <div class="fix">
+                <div class="c_1">发票内容：</div>
+                <div class="c_2">
+                    <p>
+                        <span><input type="radio" name="dx4" class="vm mr10" />日用品</span>
+                        <span><input type="radio" name="dx4" class="vm mr10" />药品</span>
+                        <span><input type="radio" name="dx4" class="vm mr10" />医疗器械</span>
+                        <span><input type="radio" name="dx4" class="vm mr10" />参茸饮片</span>
+                    </p>
+                    <p>
+                        <span><input type="radio" name="dx4" class="vm mr10" />保健品</span>
+                        <span><input type="radio" name="dx4" class="vm mr10" />食品</span>
+                        <span><input type="radio" name="dx4" class="vm mr10" />化妆品</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="title"><img src="images/tb_27.jpg" class="vm ml10 mr10" />购物清单</div>
+        <div class="con_3">
+            <div class="z_1 fix tc">
+                <div class="c_1">商品信息</div>
+                <div class="c_2">数量</div>
+                <div class="c_3">金额</div>
+                <div class="c_4">商品合计</div>
+            </div>
+            <div class="z_2 fix tc">
+                <div class="c_1 tl fix">
+                    <div class="fl mr30 di"><a href="#"><img src="images/img_9.jpg" /></a></div>
+                    <div class="fl pt20" style="width: 180px;"><a href="#">百思绒 2015秋冬新款立领修身韩版轻薄羽绒服女短款女士冬季外套 紫色 M</a></div>
+                </div>
+                <div class="c_2">1</div>
+                <div class="c_3">¥58.0</div>
+                <div class="c_4"><span>¥58.0</span></div>
+            </div>
+            <div class="z_2 fix tc">
+                <div class="c_1 tl fix">
+                    <div class="fl mr30 di"><a href="#"><img src="images/img_9.jpg" /></a></div>
+                    <div class="fl pt20" style="width: 180px;"><a href="#">百思绒 2015秋冬新款立领修身韩版轻薄羽绒服女短款女士冬季外套 紫色 M</a></div>
+                </div>
+                <div class="c_2">1</div>
+                <div class="c_3">¥58.0</div>
+                <div class="c_4"><span>¥58.0</span></div>
+            </div>
+            <div class="z_3 fix">
+                <div class="fl">产品数量总计：<span>1件</span><br>配  送  方  式：厂家配送</div>
+                <div class="fr">商品金额：<span>58 元</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="mod_21 tr b">
+        <span class="mr30">您共需要为订单支付：58.00元</span>
+        <input type="submit" value="提交订单" class="input_7 vm" />
+    </div>
+</section>
+<!--{/if}-->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+
+</body>
+<script type="text/javascript">
+function addnumber(type){
+	var n = $('#'+type);
+	var number = parseInt(n.val())+ 1;
+	data = type.split('_')[2];
+	$.ajax({
+	type:"POST",
+	dataType: "json",
+	url:'../ajaxphp/changeGoodsCart.php?'+Math.random(),
+	data:{"data":data,"number":number},
+	success: function(json){
+	if(json.success==1){
+		n.val(number);
+	var a= $('#goods_price_'+data).text().split('￥')[1];
+	var price = parseFloat(a)*number;
+	$("#goods_subtotal_"+data).text(num2string(price));
+	}
+	else 
+		alert(json.msg);
+}
+});
+	
+}
+
+function reducenumber(type){
+	var n = $('#'+type);
+	var number = parseInt(n.val()) - 1;
+	if(number <= 0)
+	{number	=1; return false;}
+	data = type.split('_')[2];
+	$.ajax({
+	type:"POST",
+	dataType: "json",
+	url:'../ajaxphp/changeGoodsCart.php?'+Math.random(),
+	data:{"data":data,"number":number},
+	success: function(json){
+	if(json.success==1){
+	n.val(number);
+	var a= $('#goods_price_'+data).text().split('￥')[1];
+	var price = parseFloat(a)*number;
+	$("#goods_subtotal_"+data).text(num2string(price));
+		
+	}
+	else 
+		alert(json.msg);
+}
+});
+
+}
+
+
+function num2string(x){
+	var f= x.toString();
+	var s = f.indexOf('.');
+	if(s<0){
+		s = f.length;
+		f += '.';
+	}
+	while(f.length<=s+2){
+		f+='0';
+	}
+	f = '￥'+ f+ "元";
+	return f;
+
+}
+
+function Price(){
+
+	var attr = getSelectedAttributes1($("#select_spec a"));
+  
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+
+
+</script>
+
+
+</html>

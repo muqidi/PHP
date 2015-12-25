@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="../js/jquery.style.js"></script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<section class="container mod_05 auto">
+    {$ur_here} ：
+	<!--{if $categories}-->
+    <select id="categroytree" onchange="getchildid()"class="xlk_1 vm">
+	<!--{foreach from=$categories item=cat}-->
+        <option value="{$cat.id}_{$cat.url}"  >{$cat.name}</option>
+	     <!--{/foreach}--> 
+    </select>
+	<!--{/if}-->
+     <select id="categroychild"  style="display:none" onchange="getchildid2()" class="xlk_1 vm">
+ 
+    </select>
+</section>
+
+
+<section class="container auto fix">
+    <div class="w_941 fl">
+        <div class="mod_06 fix">
+            <div class="fl"><b style="color:#e4393c;font-size:14px" id="categroyname"></b>&nbsp;&nbsp;
+			商品筛选
+			&nbsp;&nbsp;&nbsp;&nbsp;共{$pager.record_count }件商品</div>
+            <a href="javascript:void(0);" class="skin_1 fr">收起筛选</a>
+        </div>
+        <div class="mod_07 mb10">
+            <ul>
+                <li class="fix">
+                    <div class="c_1">品牌：</div>
+                    <div class="c_2 skin_2">
+                        <!--{foreach from=$brands item=brand}-->
+					<!-- {if $brand.selected} -->
+                    <a href="#">{$brand.brand_name}</a>
+                  	 <!-- {else} -->
+					<a href="{$brand.url}">{$brand.brand_name}</a>
+					<!-- {/if} -->
+				<!--{/foreach}--> 
+                    </div>
+                </li>
+                <li class="fix">
+                    <div class="c_1">价格：</div>
+                    <div class="c_2 skin_2">
+                <!--{foreach from=$price_grade item=grade}-->
+				<!-- {if $grade.selected} -->
+				<a href="#">{$grade.price_range}</a>
+				<!-- {else} -->
+				<a href="{$grade.url}">{$grade.price_range}</a>
+				<!-- {/if} -->
+			<!--{/foreach}-->
+                    </div>
+                </li>
+	<!--{foreach from=$filter_attr_list item=filter_attr}-->
+      <li class="fix">
+	   <div class="c_1">{$filter_attr.filter_attr_name|escape:html} :</div>
+			<div class="c_2 skin_2">
+			<!--{foreach from=$filter_attr.attr_list item=attr}-->
+				<!-- {if $attr.selected} -->
+				<a href="#">{$attr.attr_value}</a>
+				<!-- {else} -->
+				<a href="{$attr.url}">{$attr.attr_value}</a>&nbsp;
+				<!-- {/if} -->
+			<!--{/foreach}-->
+                    </div>
+                </li>
+  			<!--{/foreach}-->
+
+            </ul>
+        </div>
+        <div class="mod_08 fix">
+            <div class="con_1 fl fix">
+			
+			
+			
+			  <form method="GET" class="sort" name="listform"> 
+			  <a href="javascript:void(0);">综合排序</a>
+                <a href="category.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=comment_num&order=<!-- {if $pager.sort == 'comment_num' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list">评论数</a>
+  <a href="category.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=goods_id&order=<!-- {if $pager.sort == 'goods_id' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list">上架时间</a>
+  <a href="category.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=shop_price&order=<!-- {if $pager.sort == 'shop_price' && $pager.order == 'ASC'} -->DESC<!-- {else} -->ASC<!-- {/if} -->#goods_list">价格</a>
+  <a href="category.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=last_update&order=<!-- {if $pager.sort == 'last_update' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list">更新时间</a>
+  <a href="category.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=sales_volume&order=<!-- {if $pager.sort == 'sales_volume' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list">销量</a>
+  <input type="hidden" name="category" value="{$category}" />
+  <input type="hidden" name="display" value="{$pager.display}" id="display" />
+  <input type="hidden" name="brand" value="{$brand_id}" />
+  <input type="hidden" name="price_min" value="{$price_min}" />
+  <input type="hidden" name="price_max" value="{$price_max}" />
+  <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+  <input type="hidden" name="page" value="{$pager.page}" />
+  <input type="hidden" name="sort" value="{$pager.sort}" />
+  <input type="hidden" name="order" value="{$pager.order}" />
+
+    </form>
+			
+			
+			
+
+               
+            </div>
+            <div class="con_2 fr fix">
+                <span class="fl"> &nbsp;&nbsp;&nbsp;</span>
+				 <!-- {if $pager.page_prev} --><a href="{$pager.page_prev}"><</a><!-- {/if} -->
+					<!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">></a><!-- {/if} -->
+            </div>
+        </div>
+        <div class="mod_09 mb20">
+            <input type="checkbox" class="vm mr10 ml20" />货到付款
+            <input type="checkbox" class="vm mr10 ml20" />仅显示有货
+        </div>
+        <div class="mod_10">
+            <ul class="fix">
+			<!--{foreach from=$goods_list item=goods}-->
+			<!-- {if $goods.goods_id} -->
+                <li>
+				
+                    <div class="img mb15"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a></div>
+                    <div class="text">
+                        <div class="c_1 fix">
+						            <!--{if $goods.promote_price neq "" } -->
+           <span class="sp_1 fl">{$goods.promote_price}</span>
+            <!--{else}-->
+           <span class="sp_1 fl">{$goods.shop_price}</span>
+            <!--{/if}-->
+                            
+                            <span class="fr">421人付款</span>
+                        </div>
+                        <div class="c_2">
+                           <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a>
+                        </div>
+                        <div class="fix">
+                            <a href="#" class="a_2 fl">优衣库官方旗舰店</a>
+                            <span class="fr">上海</span>
+                        </div>
+                    </div>
+                </li>
+				
+    <!--{/if}-->
+    <!--{/foreach}-->
+</ul>
+<!--翻页 start-->
+ <div id="pager" class="page">
+
+  <!-- {if $pager.page_first} --><a href="{$pager.page_first}">{$lang.page_first} ...</a><!-- {/if} -->
+  <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+  <!-- {if $pager.page_count neq 1} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+      <!-- {if $pager.page eq $key} -->
+      <a class="current">{$key}</a>
+      <!-- {else} -->
+      <a href="{$item}">{$key}</a>
+      <!-- {/if} -->
+    <!--{/foreach}-->
+  <!-- {/if} -->
+
+  <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+  <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$lang.page_last}</a><!-- {/if} -->
+  <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+    <!-- {/if} -->
+</div>
+<!--翻页 END-->
+
+
+</form>				
+			
+        </div>
+    </div>
+    <div class="w_248 fr">
+        <div class="mod_11">
+            <div class="title mb15">推荐产品</div>
+            <div class="content">
+                <ul>
+                    <li>
+                        <div class="img">
+                            <a href="#"><img src="images/img_4.jpg" /></a>
+                        </div>
+                        <div class="text fix">
+                            <span class="sp fl">￥429.00</span>
+                            <span class="fr">销量：21</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img">
+                            <a href="#"><img src="images/img_4.jpg" /></a>
+                        </div>
+                        <div class="text fix">
+                            <span class="sp fl">￥429.00</span>
+                            <span class="fr">销量：21</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img">
+                            <a href="#"><img src="images/img_4.jpg" /></a>
+                        </div>
+                        <div class="text fix">
+                            <span class="sp fl">￥429.00</span>
+                            <span class="fr">销量：21</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--main end-->
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+	var value= $('#categroytree').val();
+	if( typeof(value)!="undefined" && value != ""){
+		var cat_id = value.split('_')[0];
+	Bingcategroychild(cat_id);}
+</script>
+</html>
